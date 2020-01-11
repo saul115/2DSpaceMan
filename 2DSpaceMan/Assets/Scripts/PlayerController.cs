@@ -7,16 +7,15 @@ public class PlayerController : MonoBehaviour
 
 
     public float walkingSpeed = 3f;
-    public float jumpForce = 30f;
+    public float jumpForce = 15f;
 
 
     Animator animator;
-    Rigidbody2D rigidbody;
+    Rigidbody2D rigidBody;
     SpriteRenderer spriteRender;
-    Physics2D physics;
 
-    const string STATE_ALIVE = "isAlive";
-    const string STATE_ON_THE_GROUND = "isOnTheGround";
+    const string STATE_ALIVE = "Alive";
+    const string STATE_ON_THE_GROUND = "Ground";
 
 
     public LayerMask groundMask;
@@ -24,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         spriteRender = GetComponent<SpriteRenderer>();
     }
 
@@ -38,34 +37,61 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+      
     }
+
 
     private void FixedUpdate()
     {
-       
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            if (rigidBody.velocity.x < walkingSpeed)
+            {
+                rigidBody.velocity = new Vector2(walkingSpeed, rigidBody.velocity.y);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+                spriteRender.flipX = false;
+
+                transform.localScale = new Vector2(1, transform.localScale.y);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (rigidBody.velocity.x < walkingSpeed)
+            {
+                rigidBody.velocity = new Vector2(walkingSpeed * -1, rigidBody.velocity.y);
+
+                spriteRender.flipX = true;
+
+                transform.localScale = new Vector2(1, transform.localScale.y);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
 
 
-        Debug.DrawRay(this.transform.position, Vector2.down * 1.36f, Color.cyan);
+        animator.SetBool(STATE_ON_THE_GROUND, IsOnTheGround());
+
+
+        Debug.DrawRay(this.transform.position, Vector2.down * 1.45f, Color.cyan);
     }
 
 
     void Jump()
     {
-        if(onTheGround())
+        if(IsOnTheGround())
         {
-            rigidbody.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
+            rigidBody.AddForce(Vector2.up * jumpForce,ForceMode2D.Impulse);
         }
     }
 
-    bool onTheGround()
+    public bool IsOnTheGround()
     {
-        if(Physics2D.Raycast(this.transform.position,Vector2.down,1.36f,groundMask))
+        if(Physics2D.Raycast(this.transform.position,Vector2.down,1.45f,groundMask))
         {
             
             return true;

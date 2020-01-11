@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jump-Air
+  m_Name: Jump_Down
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -764955213674056827, guid: b415ead478519c94db7ba1fd1dd3b3a9,
+      value: {fileID: -6095281177372623928, guid: ef895d57b88e91647be3c967f354f904,
         type: 3}
     - time: 0.083333336
-      value: {fileID: -5202395780795803806, guid: b415ead478519c94db7ba1fd1dd3b3a9,
+      value: {fileID: 8012885181672173847, guid: ef895d57b88e91647be3c967f354f904,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -764955213674056827, guid: b415ead478519c94db7ba1fd1dd3b3a9, type: 3}
-    - {fileID: -5202395780795803806, guid: b415ead478519c94db7ba1fd1dd3b3a9, type: 3}
+    - {fileID: -6095281177372623928, guid: ef895d57b88e91647be3c967f354f904, type: 3}
+    - {fileID: 8012885181672173847, guid: ef895d57b88e91647be3c967f354f904, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
