@@ -6,13 +6,15 @@ public class PlayerController : MonoBehaviour
 {
 
 
-    public float walkingSpeed = 4f;
-    public float jumpForce = 25f;
+    public float walkingSpeed = 3f;
+    public float jumpForce = 22f;
 
 
     Animator animator;
     Rigidbody2D rigidBody;
     SpriteRenderer spriteRender;
+
+    Vector2 startPosition;
    
 
     const string STATE_ALIVE = "Alive";
@@ -32,8 +34,26 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        startPosition = this.transform.position;
+
+        
+    }
+
+
+    //Method to Restart the Game
+    public void RestartGame()
+    {
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUND, false);
+
+        Invoke("RestartPosition", 0.1f);
+    }
+
+    public void RestartPosition()
+    {
+        this.transform.position = startPosition;
+        this.rigidBody.velocity = Vector2.zero;
     }
 
     // Update is called once per frame
@@ -118,7 +138,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        animator.SetBool(STATE_ALIVE, false);
+        this.animator.SetBool(STATE_ALIVE, false);
+        GameManager.sharedInstance.GameOver();
     }
 
 

@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameState currentState = GameState.inMenu;
 
     public static GameManager sharedInstance;
+
+     PlayerController controller;
     private void Awake()
     {
         if(sharedInstance == null)
@@ -25,13 +27,18 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        controller = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L) && currentState != GameState.inGame)
+       
+    }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetButtonDown("Submit") && currentState != GameState.inGame)
         {
             Game();
         }
@@ -62,12 +69,12 @@ public class GameManager : MonoBehaviour
 
         if(gameState == GameState.inGame)
         {
-
+            controller.RestartGame();
         }
 
         if(gameState == GameState.inGameOver)
         {
-
+            //controller.Die();
         }
 
         this.currentState = gameState;
