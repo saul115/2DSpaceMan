@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     public void RestartGame()
     {
         animator.SetBool(STATE_ALIVE, true);
-        animator.SetBool(STATE_ON_THE_GROUND, false);
+        animator.SetBool(STATE_ON_THE_GROUND, true);
 
         Invoke("RestartPosition", 0.1f);
     }
